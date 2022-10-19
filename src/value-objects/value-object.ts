@@ -4,7 +4,7 @@ export abstract class ValueObject<T> {
   protected innerValue: T
 
   constructor (value: T) {
-    this.checkValueIsNotNull(value)
+    this.ensureValueIsNotNull(value)
 
     this.innerValue = value
   }
@@ -17,7 +17,7 @@ export abstract class ValueObject<T> {
     return this.innerValue
   }
 
-  private checkValueIsNotNull (value: T): void {
+  private ensureValueIsNotNull (value: T): void {
     const isNull = value === null || value === undefined
 
     if (isNull) {

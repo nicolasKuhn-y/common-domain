@@ -1,3 +1,4 @@
 export * from './id'
-export * from './number'
+export * from './date'
+export * from './value-object'
 export * from './factory'

@@ -2,15 +2,15 @@
 import { randomUUID } from 'node:crypto'
 
 // Abstracts
-import { ValueObject } from '../abstracts/value-object'
+import { ValueObject } from './value-object'
 
 export class Id extends ValueObject<string> {
   constructor (value?: string) {
-    super(value || randomUUID()) // TODO: Revisar si es necesario pasarle un valor
-    this.checkIsValidUuid()
+    super(value || randomUUID())
+    this.ensureIsValidUuid()
   }
 
-  private checkIsValidUuid () {
+  private ensureIsValidUuid () {
     const regex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi
 
     const isValid = regex.test(this.innerValue)
