@@ -15,6 +15,10 @@ export abstract class AggregateRoot {
     return events
   }
 
+  public getLastEvent (): DomainEvent {
+    return this.events[this.events.length - 1]
+  }
+
   protected saveEvent (event: DomainEvent): void {
     this.events.push(event)
   }
