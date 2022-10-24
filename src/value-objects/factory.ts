@@ -1,3 +1,4 @@
+import { ERROR_TYPES } from '../errors'
 import { InvalidArgumentError } from '../errors/invalid-argument'
 import { ObjectInstanceTypes, ValueObjectMap, ValueType } from '../interfaces/factory'
 
@@ -11,7 +12,7 @@ export class ValueObjectFactory<Map extends ValueObjectMap, Keys extends keyof M
   public create<T extends Keys> (type: T, value: ValueType<Map[T]>): InstanceType<Map[T]> {
     const ValueObject = this.valueObjectMap[type]
 
-    if (!ValueObject) throw new InvalidArgumentError(`Cannot create value object from type ${type.toString()}`)
+    if (!ValueObject) throw new InvalidArgumentError(ERROR_TYPES.INVALID_TYPE, { value: type.toString() })
 
     return new ValueObject(value)
   }

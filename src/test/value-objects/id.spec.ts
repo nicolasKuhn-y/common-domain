@@ -10,6 +10,6 @@ describe('Test suite for Id Value Object', () => {
   it('should throw an error if the id argument is not valid', () => {
     const nonValidString = 'vn5'
 
-    expect(() => new Id(nonValidString)).toThrow(`Value is not a valid uuid. Value => ${nonValidString}`)
+    expect(() => new Id(nonValidString)).toThrow(`Value is not a valid uuid. Value => ${nonValidString}.`)
   })
 })
