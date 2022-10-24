@@ -15,7 +15,7 @@ export class Id extends ValueObject<string> {
   }
 
   private ensureIsValidUuid () {
-    const regex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi
+    const regex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/
 
     const isValid = regex.test(this.innerValue)
 
