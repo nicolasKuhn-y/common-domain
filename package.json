@@ -2,7 +2,7 @@
 	"name": "common-domain",
 	"version": "1.0.0",
 	"description": "Package to contain common code to reuse across different cores",
-	"main": "./dist/src/index.js",
+	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
 		"test": "jest --colors --verbose",

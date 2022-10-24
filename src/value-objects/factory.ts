@@ -1,22 +1,25 @@
+import { InvalidArgumentError } from '../errors/invalid-argument'
 import { ObjectInstanceTypes, ValueObjectMap, ValueType } from '../interfaces/factory'
 
-export class ValueObjectFactory<Map extends ValueObjectMap, Keys extends keyof Map> {
-  private readonly valueObjectMap: Map
+interface IOptions {
+  acceptEmptyValues?: boolean;
+}
 
-  constructor (valueObjectMap: Map) {
-    this.valueObjectMap = valueObjectMap
-  }
+export class ValueObjectFactory<Map extends ValueObjectMap, Keys extends keyof Map> {
+  constructor (private readonly valueObjectMap: Map) {}
 
   public create<T extends Keys> (type: T, value: ValueType<Map[T]>): InstanceType<Map[T]> {
     const ValueObject = this.valueObjectMap[type]
 
-    if (!ValueObject) throw new Error(`Cannot create value object from type ${type.toString()}`)
+    if (!ValueObject) throw new InvalidArgumentError(`Cannot create value object from type ${type.toString()}`)
 
     return new ValueObject(value)
   }
 
-  public mapToCreate<T extends Keys> (attributes: { [key in T]?: ValueType<Map[key]> }): ObjectInstanceTypes<Map, T> {
-    this.deleteEmptyAttributes(attributes)
+  public mapToCreate<T extends Keys> (attributes: { [key in T]?: ValueType<Map[key]> }, options?: IOptions) {
+    if (!options?.acceptEmptyValues) {
+      this.deleteEmptyAttributes(attributes)
+    }
 
     return this.instanciateAttributes<T>(attributes) as ObjectInstanceTypes<Map, T>
   }

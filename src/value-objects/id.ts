@@ -1,6 +1,8 @@
 // Node
 import { randomUUID } from 'node:crypto'
 
+import { InvalidArgumentError } from '../errors/invalid-argument'
+
 // Abstracts
 import { ValueObject } from './value-object'
 
@@ -15,6 +17,6 @@ export class Id extends ValueObject<string> {
 
     const isValid = regex.test(this.innerValue)
 
-    if (!isValid) throw new Error(`Value is not a valid uuid. Value => ${this.innerValue}`)
+    if (!isValid) throw new InvalidArgumentError(`Value is not a valid uuid. Value => ${this.innerValue}`)
   }
 }
