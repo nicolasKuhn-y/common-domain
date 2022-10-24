@@ -2,6 +2,8 @@ import { isDeepStrictEqual } from 'node:util'
 
 import { InvalidArgumentError } from '../errors/invalid-argument'
 
+import { ERROR_TYPES } from '../errors/error-types'
+
 export abstract class ValueObject<T> {
   protected innerValue: T
 
@@ -23,7 +25,7 @@ export abstract class ValueObject<T> {
     const isNull = value === null || value === undefined
 
     if (isNull) {
-      throw new InvalidArgumentError('Value object cannot have a null as a value')
+      throw new InvalidArgumentError(ERROR_TYPES.EMPTY, { value })
     }
   }
 }
